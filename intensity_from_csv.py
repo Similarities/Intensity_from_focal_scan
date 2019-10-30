@@ -5,7 +5,6 @@ Created on Wed Oct 30 12:15:52 2019
 @author: sweedy
 """
 import numpy as np
-import ntpath
 import math
 
 
@@ -38,21 +37,6 @@ class Load_text_into_2D_array:
 
 
 
-
-
-    def path_leaf(self):
-
-
-        ntpath.basename("a/b/c")
-
-        head, self.file_name = ntpath.split(self.file_path)
-
-        self.file_name = self.file_name[0:-4]
-
-        print("filename:", self.file_name)
-
-        return self.file_name or ntpath.basename(head)
-    
     
     def header_names(self):
         with open(self.file_path) as csv_file:
@@ -66,6 +50,9 @@ class Load_text_into_2D_array:
             print( column_header, index)
             
         return self.namelist
+
+
+
 
 
     def test_length(self):
@@ -98,13 +85,9 @@ class Load_text_into_2D_array:
         self.loaded_array = np.delete(self.loaded_array, 0, 1)
 
 
-
-
-
-       # print(self.loaded_array)
-
         return self.loaded_array
-    
+
+
     
 def substract_a_column(matrix, column, value):
     
@@ -112,14 +95,17 @@ def substract_a_column(matrix, column, value):
     
     return matrix
 
+
 def multiply_a_column(matrix, column, value):
     
     matrix[::,column] = matrix[::, column]*value
     
     return matrix
 
+
     
 def avg_to_columns(matrix, column1, column2, name_list):
+    
     new = (matrix[::,column1] + matrix[::, column2]) *  0.5
     print(new, matrix[::,0])
     
